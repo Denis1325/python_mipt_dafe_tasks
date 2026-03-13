@@ -2,7 +2,6 @@ import numpy as np
 
 
 def pad_image(image: np.ndarray, pad_size: int) -> np.ndarray:
-
     if pad_size < 1:
         raise ValueError("pad_size must be at least 1")
 
@@ -12,11 +11,11 @@ def pad_image(image: np.ndarray, pad_size: int) -> np.ndarray:
 
     if image.ndim == 2:
         new_image = np.zeros((new_height, new_width), dtype=image.dtype)
-        new_image[pad_size:pad_size + height, pad_size:pad_size + width] = image
+        new_image[pad_size : pad_size + height, pad_size : pad_size + width] = image
 
     elif image.ndim == 3:
         new_image = np.zeros((new_height, new_width, image.shape[2]), dtype=image.dtype)
-        new_image[pad_size:pad_size + height, pad_size:pad_size + width, :] = image
+        new_image[pad_size : pad_size + height, pad_size : pad_size + width, :] = image
 
     else:
         raise ValueError("image dimensions must be 2 or 3")
@@ -28,7 +27,6 @@ def blur_image(
     image: np.ndarray,
     kernel_size: int,
 ) -> np.ndarray:
-
     if kernel_size < 1:
         raise ValueError("kernel size must be at least 1")
     elif kernel_size % 2 == 0:
@@ -39,7 +37,6 @@ def blur_image(
     k = kernel_size
 
     if image.ndim == 2:
-
         height, width = image.shape
 
         cumsum_image = padded_image.cumsum(axis=0).cumsum(axis=1)
@@ -53,18 +50,18 @@ def blur_image(
         result = np.round(result).astype(np.uint8)
 
     elif image.ndim == 3:
-
         height, width, colors = image.shape
         result = np.zeros((height, width, colors), dtype=np.float64)
 
         for c in range(colors):
-
             color = padded_image[:, :, c]
             cumsum_image = color.cumsum(axis=0).cumsum(axis=1)
 
             i, j = np.indices((height, width))
 
-            extra_window_sum = cumsum_image[i, j + k - 1] + cumsum_image[i + k - 1, j] - cumsum_image[i, j]
+            extra_window_sum = (
+                cumsum_image[i, j + k - 1] + cumsum_image[i + k - 1, j] - cumsum_image[i, j]
+            )
 
             window_sum = cumsum_image[i + k - 1, j + k - 1] - extra_window_sum
 

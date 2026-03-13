@@ -5,7 +5,6 @@ def get_dominant_color_info(
     image: np.ndarray[np.uint8],
     threshold: int = 5,
 ) -> tuple[np.uint8, float]:
-
     if threshold < 1:
         raise ValueError("threshold must be at least 1")
 
@@ -19,11 +18,10 @@ def get_dominant_color_info(
     most_popular_color = 0
 
     for c in range(256):
-
         left = max(0, c - threshold + 1)
         right = min(255, c + threshold - 1)
 
-        current_color_count = np.sum(pixels_count[left:right + 1])
+        current_color_count = np.sum(pixels_count[left : right + 1])
 
         if most_popular_count > most_popular_count:
             most_popular_count = current_color_count
