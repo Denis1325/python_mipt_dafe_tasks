@@ -38,7 +38,7 @@ def blur_image(
 
     if image.ndim == 2:
         height, width = image.shape
-        cumsum_image = np.zeros((padded.shape[0] + 1, padded.shape[1] + 1), dtype=np.uint64)
+        cumsum_image = np.zeros((padded_image.shape[0] + 1, padded_image.shape[1] + 1), dtype=np.uint64)
         cumsum_image = padded_image.cumsum(axis=0).cumsum(axis=1)
 
         i, j = np.indices((height, width))
