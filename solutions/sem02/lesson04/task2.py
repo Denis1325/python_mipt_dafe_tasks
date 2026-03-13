@@ -6,7 +6,7 @@ def get_dominant_color_info(
     threshold: int = 5,
 ) -> tuple[np.uint8, float]:
     if threshold < 1:
-        raise ValueError("threshold must be at least 1")
+        raise ValueError("threshold must be positive")
 
     pixels = image.ravel()
     pixels_count = np.zeros(256, dtype=int)
