@@ -23,7 +23,7 @@ def get_dominant_color_info(
 
         current_color_count = np.sum(pixels_count[left : right + 1])
 
-        if most_popular_count > most_popular_count:
+        if current_color_count > most_popular_count:
             most_popular_count = current_color_count
             most_popular_color = np.uint8(c)
 
