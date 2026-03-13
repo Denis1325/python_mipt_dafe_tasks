@@ -18,6 +18,8 @@ def get_dominant_color_info(
     most_popular_color = 0
 
     for c in range(256):
+        if pixels_count[c] == 0:
+            continue
         left = max(0, c - threshold + 1)
         right = min(255, c + threshold - 1)
 
